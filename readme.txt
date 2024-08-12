@@ -27,6 +27,11 @@ COPY src/ /app/
 CMD ["python", "main.py"]
 
 
+#Comando para construir de de forma localmente , la imagen docker del entorno develop: 
+docker build -f Dockerfile.develop -t proyecto-python-dev:latest .
+
+
+
 
 name: IC
 
