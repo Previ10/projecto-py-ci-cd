@@ -75,4 +75,3 @@ jobs:
 
     - name: Push Docker image to DockerHub
       run: docker push "${{ secrets.DOCKER_USERNAME }}/proyecto-python:latest"
-///
