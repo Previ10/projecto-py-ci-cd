@@ -30,7 +30,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image for development
-      run: docker build -f Dockerfile.dev -t proyecto-python-dev:latest .
+      run: docker build -f Dockerfile.develop -t proyecto-python-dev:latest .
 
     - name: Update TAG for development
       run: docker tag proyecto-python-dev:latest "${{ secrets.DOCKER_USERNAME }}/proyecto-python-dev:latest"
