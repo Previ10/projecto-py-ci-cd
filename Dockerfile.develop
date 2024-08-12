@@ -1,0 +1,24 @@
+# Usa la imagen base de Python
+FROM python:3.9.7
+
+# Establece el directorio de trabajo en el contenedor
+WORKDIR /app
+
+# Copia el archivo de requisitos al contenedor
+COPY src/requirements.txt /app/
+
+# Instala las dependencias del proyecto
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia todo el código fuente al contenedor
+COPY src/ /app
+
+# Establece variables de entorno para desarrollo
+ENV FLASK_ENV=development
+ENV DEBUG=True
+
+# Expone el puerto que la aplicación usará (ajusta si es necesario)
+EXPOSE 5000
+
+# Comando por defecto para ejecutar la aplicación en modo desarrollo
+CMD ["python", "main.py"]

@@ -1,0 +1,10 @@
+# Ignorar archivos de configuración específicos de desarrollo
+Dockerfile.dev
+
+# Ignorar archivos de configuración y dependencias innecesarias
+*.pyc
+__pycache__/
+*.git
+*.gitignore
+*.DS_Store
+.env
