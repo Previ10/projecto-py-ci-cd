@@ -1,6 +1,3 @@
-# Ignorar archivos de configuración específicos de desarrollo
-Dockerfile.dev
-
 # Ignorar archivos de configuración y dependencias innecesarias
 *.pyc
 __pycache__/
