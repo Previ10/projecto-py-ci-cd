@@ -21,4 +21,4 @@ ENV DEBUG=True
 EXPOSE 5000
 
 # Comando por defecto para ejecutar la aplicación en modo desarrollo
-CMD ["python", "main.py"]
+CMD ["python", "app.py"]
