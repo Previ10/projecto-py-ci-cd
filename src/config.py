@@ -7,7 +7,7 @@ user = os.getenv("MYSQL_USER")
 password = os.getenv("MYSQL_PASSWORD")
 host = os.getenv("MYSQL_HOST")
 database = os.getenv("MYSQL_DATABASE")
-port = os.getenv("MYSQL_PORT", 3306)  # Valor por defecto 3306 si no se especifica
+port = os.getenv("MYSQL_PORT", 3306)  
 
 DATABASE_CONNECTION_URI = f'mysql+pymysql://{user}:{password}@{host}:{port}/{database}'
 # from dotenv import load_dotenv

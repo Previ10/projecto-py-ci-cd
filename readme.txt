@@ -1,82 +1,43 @@
-/proyecto
-  ├── /src
-  │   ├── requirements.txt
-  │   └── otros archivos y carpetas
-  ├── /venv
-  ├── Dockerfile
-  ├── .gitignore
-  ├── /github (u otra carpeta relacionada con GitHub)
-  └── otros archivos y carpetas
+Proyecto Python Flask con Docker y CI/CD
+Este proyecto es una aplicación Python Flask que se configura para ser ejecutada en un entorno Docker y se integra con DockerHub a través de un flujo de trabajo de integración continua en GitHub Actions. A continuación, se detalla el proceso de configuración y despliegue del proyecto.
 
-# Usa una imagen base de Python
-FROM python:3.9.7
-
-# Configura el directorio de trabajo
-WORKDIR /app
-
-# Copia el archivo requirements.txt desde la carpeta src a /app
-COPY src/requirements.txt /app/
-
-# Instala las dependencias desde requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copia todo el contenido de src a /app
-COPY src/ /app/
-
-# Comando por defecto para ejecutar tu aplicación (ajusta según sea necesario)
-CMD ["python", "main.py"]
+Estructura del Proyecto
+1. Estructura de Archivos
+app.py: Archivo principal de la aplicación Flask.
+config.py: Archivo de configuración que carga variables de entorno para la conexión a la base de datos.
+index.py: Script para inicializar la base de datos.
+Dockerfile: Dockerfile para construir la imagen de producción.
+Dockerfile-develop: Dockerfile para el entorno de desarrollo.
+.env: Archivo de variables de entorno para la configuración local (no incluido en el repositorio).
+requirements.txt: Archivo de dependencias de Python.
+src/: Directorio que contiene el código fuente del proyecto.
 
 
-#Comando para construir de de forma localmente , la imagen docker del entorno develop: 
-docker build -f Dockerfile.develop -t proyecto-python-dev:latest .
+2 Instrucciones de Ejecución
+Para ejecutar el entorno de desarrollo:
+´´bash
+docker build -f Dockerfile-develop -t proyecto-python-dev:latest .
+Ejecutar el contenedor:
 
+´´bash
+docker run -p 5000:5000 proyecto-python-dev:latest
+Para ejecutar el entorno de producción:
 
+Construir la imagen Docker para producción:
 
+´´bash
+docker build -t proyecto-python:latest .
+Ejecutar el contenedor:
 
-name: IC
+´´bash
+docker run -p 5000:5000 proyecto-python:latest
+8. Despliegue en DockerHub
+Asegúrate de tener configurados los secretos DOCKER_USERNAME y DOCKER_PASSWORD en tu repositorio de GitHub. Estos se utilizan para autenticar y subir imágenes a DockerHub.
 
-on:
-  push:
-    branches: 
-        master
-  pull_request:
-    branches: 
-       master
+Para activar el flujo de trabajo de CI/CD:
 
+Realiza un push a la rama main o crea una solicitud de extracción (pull request) a main.
 
-jobs:
-  build:
-    runs-on: ubuntu-latest  # Cambiar a Ubuntu para mejor compatibilidad con Docker
+GitHub Actions construirá y subirá la imagen Docker automáticamente.
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.9.7'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r src/requirements.txt
-
-    - name: Run tests
-      run: |
-        pytest
-
-    - name: Log in to DockerHub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Build Docker image
-      run: docker build -t proyecto-python:latest .
-
-    - name: Update TAG
-      run: docker tag proyecto-python:latest "${{ secrets.DOCKER_USERNAME }}/proyecto-python:latest"
-
-    - name: Push Docker image to DockerHub
-      run: docker push "${{ secrets.DOCKER_USERNAME }}/proyecto-python:latest"
+Este README proporciona una visión general completa de la configuración y despliegue de tu aplicación Python Flask con Docker y GitHub Actions. Asegúrate de ajustar las configuraciones específicas según las necesidades de tu proyecto.
