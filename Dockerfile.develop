@@ -1,4 +1,4 @@
-# Usa la imagen base de Python
+# Usa una imagen base de Python
 FROM python:3.9.7
 
 # Establece el directorio de trabajo en el contenedor
@@ -16,9 +16,11 @@ COPY src/ /app
 # Establece variables de entorno para desarrollo
 ENV FLASK_ENV=development
 ENV DEBUG=True
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_RUN_PORT=5000
 
-# Expone el puerto que la aplicación usará (ajusta si es necesario)
+# Expose el puerto en el que la aplicación se ejecutará
 EXPOSE 5000
 
 # Comando por defecto para ejecutar la aplicación en modo desarrollo
-CMD ["python", "app.py"]
+CMD ["flask", "run"]

@@ -1,4 +1,3 @@
-
 # Ignorar archivos de configuración y dependencias innecesarias
 *.pyc
 __pycache__/
