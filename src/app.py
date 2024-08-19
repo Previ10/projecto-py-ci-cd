@@ -3,6 +3,7 @@ from flask import (Flask,Blueprint,render_template,request,redirect,url_for,flas
 from flask_jwt_extended import (JWTManager, jwt_required, create_access_token,get_jwt_identity)
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+import schedule
 from config import DATABASE_CONNECTION_URI
 # Importar create_engine y NullPool
 from sqlalchemy import create_engine

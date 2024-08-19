@@ -1,6 +1,18 @@
-version: '3.8'
-
 services:
+  
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5000"  
+    env_file:
+      - ./src/.env
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
   db:
     image: mysql:latest
     container_name: mysql_db
