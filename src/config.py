@@ -18,7 +18,7 @@ DATABASE_CONNECTION_URI = f'mysql+pymysql://{user}:{password}@{host}:{port}/{dat
 # password = os.environ["MYSQL_PASSWORD"]
 # host = os.environ["MYSQL_HOST"]
 # database = os.environ["MYSQL_DATABASE"]
-
+##comentario 
 
 # DATABASE_CONNECTION_URI = f'mysql+pymysql://{user}:{password}@{host}/{database}'
 #print(DATABASE_CONNECTION_URI)
